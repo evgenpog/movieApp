@@ -1,12 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:model="clr-namespace:DataLayer" xmlns:local="clr-namespace:movieApp"
              x:Class="movieApp.MainPage">
 
     <StackLayout>
         <Label x:Name="Greatings" Text="Добро пожаловать!" FontSize="25" TextColor="Black"  HorizontalTextAlignment="Center" />
         <Button Text = "Справка" FontSize="Large" BorderWidth="1" HorizontalOptions="Center" Clicked="ClickedHelp" />
         <Button Text = "Добавить фильм" FontSize="Large" BorderWidth="1" HorizontalOptions="Center" Clicked="ClickedAddFilm" />
+        <RefreshView x:DataType="local:MainPage" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+            <CollectionView x:Name="ItemsListView"
+                ItemsSource="{Binding Items}"
+                SelectionMode="None">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="10" x:DataType="model:MovieInfo">
+                            <Label Text="{Binding Name}" 
+                            LineBreakMode="NoWrap" 
+                            TextColor="Black"
+                            FontSize="16" />
+                            <Label Text="{Binding Genre}" 
+                            LineBreakMode="NoWrap"
+                            TextColor="Black"
+                            FontSize="13" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
     </StackLayout>
 
 </ContentPage>
