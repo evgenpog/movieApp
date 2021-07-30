@@ -2,7 +2,7 @@
 
 namespace DataLayer
 {
-    public class MovieInfo
+    public class MovieInfo 
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

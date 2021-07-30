@@ -9,5 +9,4 @@ namespace DataLayer
         public MovieGenre Genre { get; set; }
         public DateTime ReleaseDate { get; set; }
     }
-
 }
