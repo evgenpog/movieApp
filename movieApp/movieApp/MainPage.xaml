@@ -1,13 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:model="clr-namespace:DataLayer" xmlns:local="clr-namespace:movieApp"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:model="clr-namespace:DataLayer" 
+             xmlns:local="clr-namespace:movieApp" 
+             xmlns:viewmodels="clr-namespace:movieApp.ViewModels" 
+             x:DataType="viewmodels:MoviesViewModel"
              x:Class="movieApp.MainPage">
 
-    <StackLayout>
-        <Label x:Name="Greatings" Text="Добро пожаловать!" FontSize="25" TextColor="Black"  HorizontalTextAlignment="Center" />
-        <Button Text = "Справка" FontSize="Large" BorderWidth="1" HorizontalOptions="Center" Clicked="ClickedHelp" />
-        <Button Text = "Добавить фильм" FontSize="Large" BorderWidth="1" HorizontalOptions="Center" Clicked="ClickedAddFilm" />
-        <Label Text="{Binding Name}" FontSize="Medium" />
-    </StackLayout>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" x:Name="Greatings" Text="Добро пожаловать!" FontSize="25" TextColor="Black"  HorizontalTextAlignment="Center" />
+        <Button Grid.Row="1" Text = "Справка" FontSize="Large" BorderWidth="1" HorizontalOptions="Center" Clicked="ClickedHelp" />
+        <Button  Grid.Row="2" Text = "Добавить фильм" FontSize="Large" BorderWidth="1" HorizontalOptions="Center" Clicked="ClickedAddFilm" />
+
+        <ListView 
+            Grid.Row="3"
+            x:Name="booksList" 
+            ItemsSource="{Binding Movies, Mode=OneWay}" 
+            HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <StackLayout>
+                                <Label x:DataType="model:MovieInfo" Text="{Binding Name}" FontSize="Medium" />
+                            </StackLayout>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
 
 </ContentPage>

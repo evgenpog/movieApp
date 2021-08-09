@@ -1,24 +1,16 @@
 ﻿using DataLayer;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using movieApp.ViewModels;
 using Xamarin.Forms;
 
 namespace movieApp
 {
     public partial class MainPage : ContentPage
     {
+        private IMovieProvider _movieProvider;
         public MainPage()
         {
-            this.BindingContext = new MovieViewModel 
-            {
-                Name = "Ajfkds"
-            };
+            _movieProvider = new MovieFakeProvider();
+            BindingContext = new MoviesViewModel(_movieProvider);
         }
         private async void ClickedHelp(object sender, System.EventArgs e)
         {

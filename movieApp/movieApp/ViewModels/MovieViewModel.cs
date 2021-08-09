@@ -5,21 +5,20 @@ namespace DataLayer
     public class MovieViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private MovieInfo mov;
-        public MovieViewModel()
+        private MovieInfo _movieInfo;
+        private string name;
+
+        public MovieViewModel(MovieInfo movieInfo)
         {
-            mov = new MovieInfo();
+            _movieInfo = movieInfo;
+            Name = movieInfo.Name;
         }
         public string Name
         {
-            get { return mov.Name; }
-            set
+            get => name; set
             {
-                if (mov.Name != value)
-                {
-                    mov.Name = value;
-                    OnPropertyChanged("Title");
-                }
+                name = value;
+                OnPropertyChanged(nameof(Name));
             }
         }
 
